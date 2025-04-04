@@ -83,17 +83,24 @@ export default function EmployeeCard({ employee, onEditClick }: EmployeeCardProp
         {/* Expanded View */}
         {isExpanded && (
           <div className="border-t border-gray-100 bg-gray-50 p-5">
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-              <div className="md:col-span-1">
-                <p className="text-sm text-gray-500">Email</p>
-                <p className="text-gray-800">{employee.email}</p>
-                <p className="text-sm text-gray-500 mt-3">Phone</p>
+            {/* Email - Full width */}
+            <div className="mb-4">
+              <p className="text-sm text-gray-500">Email</p>
+              <p className="text-gray-800">{employee.email}</p>
+            </div>
+            
+            {/* Other fields in grid */}
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+              <div>
+                <p className="text-sm text-gray-500">Phone</p>
                 <p className="text-gray-800">{employee.phone || "Not provided"}</p>
               </div>
-              <div className="md:col-span-1">
+              <div>
                 <p className="text-sm text-gray-500">Department</p>
                 <p className="text-gray-800">{employee.department}</p>
-                <p className="text-sm text-gray-500 mt-3">Date of Joining</p>
+              </div>
+              <div>
+                <p className="text-sm text-gray-500">Date of Joining</p>
                 <p className="text-gray-800">{formatDate(employee.joinDate)}</p>
               </div>
             </div>
