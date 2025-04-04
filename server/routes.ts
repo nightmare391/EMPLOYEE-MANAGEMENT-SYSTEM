@@ -19,6 +19,16 @@ export async function registerRoutes(app: Express): Promise<Server> {
     }
   });
   
+  // SEARCH employees - IMPORTANT: This must come BEFORE the /:id route
+  apiRouter.get("/employees/search", async (req, res) => {
+    try {
+      const results = await storage.searchEmployees(req.query);
+      res.json(results);
+    } catch (error) {
+      res.status(500).json({ message: "Failed to search employees" });
+    }
+  });
+  
   // GET single employee by ID
   apiRouter.get("/employees/:id", async (req, res) => {
     try {
@@ -89,24 +99,18 @@ export async function registerRoutes(app: Express): Promise<Server> {
         return res.status(400).json({ message: "Invalid employee ID" });
       }
       
+      console.log(`Attempting to delete employee with ID: ${id}`);
       const success = await storage.deleteEmployee(id);
+      console.log(`Delete result: ${success}`);
+      
       if (!success) {
         return res.status(404).json({ message: "Employee not found" });
       }
       
       res.status(204).send();
     } catch (error) {
+      console.error("Error deleting employee:", error);
       res.status(500).json({ message: "Failed to delete employee" });
-    }
-  });
-  
-  // SEARCH employees
-  apiRouter.get("/employees/search", async (req, res) => {
-    try {
-      const results = await storage.searchEmployees(req.query);
-      res.json(results);
-    } catch (error) {
-      res.status(500).json({ message: "Failed to search employees" });
     }
   });
   
