@@ -84,20 +84,16 @@ export default function EmployeeCard({ employee, onEditClick }: EmployeeCardProp
         {isExpanded && (
           <div className="border-t border-gray-100 bg-gray-50 p-5">
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-              <div>
+              <div className="md:col-span-1">
                 <p className="text-sm text-gray-500">Email</p>
                 <p className="text-gray-800">{employee.email}</p>
-              </div>
-              <div>
-                <p className="text-sm text-gray-500">Phone</p>
+                <p className="text-sm text-gray-500 mt-3">Phone</p>
                 <p className="text-gray-800">{employee.phone || "Not provided"}</p>
               </div>
-              <div>
+              <div className="md:col-span-1">
                 <p className="text-sm text-gray-500">Department</p>
                 <p className="text-gray-800">{employee.department}</p>
-              </div>
-              <div>
-                <p className="text-sm text-gray-500">Date of Joining</p>
+                <p className="text-sm text-gray-500 mt-3">Date of Joining</p>
                 <p className="text-gray-800">{formatDate(employee.joinDate)}</p>
               </div>
             </div>
