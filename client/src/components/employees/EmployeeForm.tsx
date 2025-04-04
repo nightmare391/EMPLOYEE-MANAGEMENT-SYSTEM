@@ -69,10 +69,8 @@ export default function EmployeeForm({ initialData, onSuccess, onCancel }: Emplo
   // Create mutation
   const createMutation = useMutation({
     mutationFn: async (data: EmployeeFormValues) => {
-      const response = await apiRequest("POST", "/api/employees", {
-        ...data,
-        joinDate: new Date(data.joinDate),
-      });
+      console.log("Creating employee with data:", data);
+      const response = await apiRequest("POST", "/api/employees", data);
       return response.json();
     },
     onSuccess: () => {
@@ -96,10 +94,8 @@ export default function EmployeeForm({ initialData, onSuccess, onCancel }: Emplo
   // Update mutation
   const updateMutation = useMutation({
     mutationFn: async (data: EmployeeFormValues) => {
-      const response = await apiRequest("PUT", `/api/employees/${initialData?.id}`, {
-        ...data,
-        joinDate: new Date(data.joinDate),
-      });
+      console.log("Updating employee with data:", data);
+      const response = await apiRequest("PUT", `/api/employees/${initialData?.id}`, data);
       return response.json();
     },
     onSuccess: () => {

@@ -51,10 +51,13 @@ export async function registerRoutes(app: Express): Promise<Server> {
   // POST create a new employee
   apiRouter.post("/employees", async (req, res) => {
     try {
+      console.log("Received POST data:", req.body);
       const employeeData = insertEmployeeSchema.parse(req.body);
+      console.log("Parsed employee data:", employeeData);
       const newEmployee = await storage.createEmployee(employeeData);
       res.status(201).json(newEmployee);
     } catch (error) {
+      console.error("Error creating employee:", error);
       if (error instanceof ZodError) {
         const validationError = fromZodError(error);
         return res.status(400).json({ message: validationError.message });
@@ -72,8 +75,11 @@ export async function registerRoutes(app: Express): Promise<Server> {
         return res.status(400).json({ message: "Invalid employee ID" });
       }
       
+      console.log("Received PUT data for ID:", id, req.body);
+      
       // Validate the update data (partial validation)
       const updateData = insertEmployeeSchema.partial().parse(req.body);
+      console.log("Parsed update data:", updateData);
       
       const updatedEmployee = await storage.updateEmployee(id, updateData);
       if (!updatedEmployee) {
@@ -82,6 +88,7 @@ export async function registerRoutes(app: Express): Promise<Server> {
       
       res.json(updatedEmployee);
     } catch (error) {
+      console.error("Error updating employee:", error);
       if (error instanceof ZodError) {
         const validationError = fromZodError(error);
         return res.status(400).json({ message: validationError.message });

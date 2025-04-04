@@ -29,6 +29,13 @@ export const insertEmployeeSchema = createInsertSchema(employees).pick({
   email: z.string().email({ message: "Invalid email address" }),
   phone: z.string().optional(),
   about: z.string().optional(),
+  // Handle both string and Date types for joinDate
+  joinDate: z.union([
+    z.string().refine(val => !isNaN(new Date(val).getTime()), {
+      message: "Invalid date format"
+    }).transform(val => new Date(val)),
+    z.date()
+  ]),
 });
 
 // Define types for the employee

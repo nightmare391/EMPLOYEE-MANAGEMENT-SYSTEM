@@ -13,19 +13,19 @@ export default function Footer() {
           <div className="mt-4 md:mt-0">
             <div className="flex space-x-6">
               <Link href="/privacy">
-                <a className="text-gray-500 hover:text-primary">
+                <span className="text-gray-500 hover:text-primary cursor-pointer">
                   Privacy Policy
-                </a>
+                </span>
               </Link>
               <Link href="/terms">
-                <a className="text-gray-500 hover:text-primary">
+                <span className="text-gray-500 hover:text-primary cursor-pointer">
                   Terms of Service
-                </a>
+                </span>
               </Link>
               <Link href="/contact">
-                <a className="text-gray-500 hover:text-primary">
+                <span className="text-gray-500 hover:text-primary cursor-pointer">
                   Contact Us
-                </a>
+                </span>
               </Link>
             </div>
           </div>
