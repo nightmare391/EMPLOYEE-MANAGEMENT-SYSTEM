@@ -54,7 +54,7 @@ export default function Search() {
         if (searchParams.name && !employee.name.toLowerCase().includes(searchParams.name.toLowerCase())) {
           return false;
         }
-        if (searchParams.department && employee.department !== searchParams.department) {
+        if (searchParams.department && searchParams.department !== "all" && employee.department !== searchParams.department) {
           return false;
         }
         if (searchParams.role && !employee.role.toLowerCase().includes(searchParams.role.toLowerCase())) {
@@ -118,7 +118,7 @@ export default function Search() {
                 <SelectValue placeholder="All Departments" />
               </SelectTrigger>
               <SelectContent>
-                <SelectItem value="">All Departments</SelectItem>
+                <SelectItem value="all">All Departments</SelectItem>
                 {departments.map((department) => (
                   <SelectItem key={department} value={department}>
                     {department}
