@@ -41,16 +41,16 @@ export default function Navbar() {
           <div className="hidden md:flex md:items-center">
             {navLinks.map((link) => (
               <Link key={link.path} href={link.path}>
-                <a
+                <span
                   className={cn(
-                    "px-3 py-2 rounded-md text-sm font-medium",
+                    "px-3 py-2 rounded-md text-sm font-medium cursor-pointer",
                     isActive(link.path)
                       ? "text-primary"
                       : "text-gray-500 hover:text-primary"
                   )}
                 >
                   {link.label}
-                </a>
+                </span>
               </Link>
             ))}
           </div>
@@ -76,9 +76,9 @@ export default function Navbar() {
           <div className="px-2 pt-2 pb-3 space-y-1">
             {navLinks.map((link) => (
               <Link key={link.path} href={link.path}>
-                <a
+                <span
                   className={cn(
-                    "block px-3 py-2 rounded-md text-base font-medium",
+                    "block px-3 py-2 rounded-md text-base font-medium cursor-pointer",
                     isActive(link.path)
                       ? "text-primary bg-gray-50"
                       : "text-gray-500 hover:text-primary hover:bg-gray-50"
@@ -86,7 +86,7 @@ export default function Navbar() {
                   onClick={closeMenu}
                 >
                   {link.label}
-                </a>
+                </span>
               </Link>
             ))}
           </div>

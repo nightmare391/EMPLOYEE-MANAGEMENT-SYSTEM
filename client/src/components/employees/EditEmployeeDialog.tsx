@@ -3,6 +3,7 @@ import {
   DialogContent,
   DialogHeader,
   DialogTitle,
+  DialogDescription,
 } from "@/components/ui/dialog";
 import EmployeeForm from "./EmployeeForm";
 import { type Employee } from "@shared/schema";
@@ -23,6 +24,9 @@ export default function EditEmployeeDialog({
       <DialogContent className="sm:max-w-[600px]">
         <DialogHeader>
           <DialogTitle>Edit Employee</DialogTitle>
+          <DialogDescription>
+            Make changes to the employee information below.
+          </DialogDescription>
         </DialogHeader>
         {employee && (
           <EmployeeForm 
