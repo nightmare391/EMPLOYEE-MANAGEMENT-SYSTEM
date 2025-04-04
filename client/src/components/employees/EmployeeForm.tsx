@@ -29,6 +29,8 @@ import { format } from "date-fns";
 // Extend the schema for form validation
 const employeeFormSchema = insertEmployeeSchema.extend({
   phone: z.string().optional(),
+  // Override the joinDate field to accept string from the date input
+  joinDate: z.string(),
 });
 
 type EmployeeFormValues = z.infer<typeof employeeFormSchema>;
