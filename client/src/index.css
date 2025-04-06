@@ -3,13 +3,12 @@
 @tailwind utilities;
 
 :root {
-  --background: #3c2f2f; /* Dark coffee */
-  --foreground: #f5e8d5; /* Cream */
-  --primary: #a67c52;    /* Medium roast coffee */
-  --card: #4e3b31;       /* Espresso */
-  --navbar: #63493a;     /* Coffee bean */
-  --accent: #d3b99f;     /* Coffee with cream */
-  --muted: #8c7355;      /* Mocha */
+  --background: #362b18; /* Dark brown background */
+  --primary: #9f8453;    /* Gold/tan accent */
+  --card: #423723;       /* Medium brown for cards */
+  --accent: #bda476;     /* Light gold for highlights */
+  --neutral: #aaaaaa;    /* Gray for neutral elements */
+  --foreground: #f5f5f5; /* Off-white text */
 }
 
 @layer base {
@@ -23,7 +22,7 @@
     color: var(--foreground);
   }
 
-  /* Cards */
+  /* Cards and containers */
   .bg-card, .bg-white, .bg-gray-50, .bg-gray-100 {
     background-color: var(--card) !important;
     color: var(--foreground) !important;
@@ -31,8 +30,8 @@
 
   /* Navbar */
   nav, header {
-    background-color: var(--navbar) !important;
-    color: var(--foreground) !important;
+    background-color: var(--primary) !important;
+    color: var(--background) !important;
   }
 
   /* Buttons */
@@ -40,14 +39,15 @@
   button[type="submit"],
   .btn-primary {
     background-color: var(--primary) !important;
-    color: var(--foreground) !important;
+    color: var(--background) !important;
+    font-weight: 500;
   }
 
   /* Hover states */
   .hover\:bg-primary:hover,
   .hover\:bg-blue-600:hover,
   button[type="submit"]:hover {
-    background-color: var(--muted) !important;
+    background-color: var(--accent) !important;
   }
 
   /* Accent elements */
@@ -65,13 +65,14 @@
   input, select, textarea {
     background-color: var(--background) !important;
     color: var(--foreground) !important;
-    border-color: var(--muted) !important;
+    border-color: var(--accent) !important;
   }
 
   /* Table elements */
   th {
-    background-color: var(--navbar) !important;
-    color: var(--foreground) !important;
+    background-color: var(--primary) !important;
+    color: var(--background) !important;
+    font-weight: 600;
   }
 
   td {
@@ -80,7 +81,12 @@
 
   /* Badges and indicators */
   .badge {
-    background-color: var(--muted) !important;
-    color: var(--foreground) !important;
+    background-color: var(--neutral) !important;
+    color: var(--background) !important;
+  }
+
+  /* Borders */
+  .border, [class*="border"] {
+    border-color: var(--accent) !important;
   }
 }
