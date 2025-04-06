@@ -21,6 +21,11 @@
     background-color: var(--background);
     color: var(--foreground);
   }
+  
+  /* Employee card styles */
+  h3, h2, .employee-name, .text-xl, .text-lg, .font-semibold, .font-bold, p {
+    color: var(--foreground) !important;
+  }
 
   /* Cards and containers */
   .bg-card, .bg-white, .bg-gray-50, .bg-gray-100 {
