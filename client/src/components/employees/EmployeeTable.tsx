@@ -150,7 +150,12 @@ export default function EmployeeTable({ employees, onEdit, onDelete }: EmployeeT
                     variant="ghost"
                     size="sm"
                     className="text-red-600 hover:text-red-900 hover:bg-red-50"
-                    onClick={() => onDelete(employee)}
+                    onClick={(e) => {
+                      e.preventDefault();
+                      e.stopPropagation();
+                      console.log("Delete button clicked for employee ID:", employee.id);
+                      onDelete(employee);
+                    }}
                   >
                     <Trash2 className="h-4 w-4 mr-1" /> Delete
                   </Button>

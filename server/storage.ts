@@ -82,8 +82,22 @@ export class MemStorage implements IStorage {
 
   async createEmployee(insertEmployee: InsertEmployee): Promise<Employee> {
     const id = this.currentId++;
-    const employee: Employee = { ...insertEmployee, id };
+    
+    // Make sure the data matches the Employee type with proper null handling
+    const employee: Employee = {
+      id,
+      name: insertEmployee.name,
+      role: insertEmployee.role,
+      department: insertEmployee.department,
+      city: insertEmployee.city,
+      email: insertEmployee.email,
+      phone: insertEmployee.phone ?? null, // Use null coalescing for proper null handling
+      joinDate: insertEmployee.joinDate,
+      about: insertEmployee.about ?? null // Use null coalescing for proper null handling
+    };
+    
     this.employees.set(id, employee);
+    console.log(`Created employee with ID ${id}:`, employee);
     return employee;
   }
 
@@ -94,9 +108,18 @@ export class MemStorage implements IStorage {
       return undefined;
     }
     
+    // Create a properly typed updated employee object
     const updated: Employee = {
       ...existingEmployee,
-      ...updatedEmployee,
+      // Only update fields that are provided
+      name: updatedEmployee.name ?? existingEmployee.name,
+      role: updatedEmployee.role ?? existingEmployee.role,
+      department: updatedEmployee.department ?? existingEmployee.department,
+      city: updatedEmployee.city ?? existingEmployee.city,
+      email: updatedEmployee.email ?? existingEmployee.email,
+      phone: updatedEmployee.phone !== undefined ? updatedEmployee.phone : existingEmployee.phone,
+      joinDate: updatedEmployee.joinDate ?? existingEmployee.joinDate,
+      about: updatedEmployee.about !== undefined ? updatedEmployee.about : existingEmployee.about,
     };
     
     this.employees.set(id, updated);
@@ -104,17 +127,33 @@ export class MemStorage implements IStorage {
   }
 
   async deleteEmployee(id: number): Promise<boolean> {
+    console.log(`Attempting to delete employee with ID ${id}`);
+    console.log(`Current employees in storage: ${Array.from(this.employees.keys()).join(', ')}`);
+    
     // Check if the employee exists before trying to delete
     const exists = this.employees.has(id);
     console.log(`Employee with ID ${id} exists: ${exists}`);
     
     if (exists) {
-      const result = this.employees.delete(id);
-      console.log(`Map.delete result for ID ${id}: ${result}`);
-      return result;
+      try {
+        // Get the employee before deleting (for logging)
+        const employee = this.employees.get(id);
+        console.log(`Found employee to delete:`, employee);
+        
+        // Try to delete the employee
+        const result = this.employees.delete(id);
+        console.log(`Map.delete result for ID ${id}: ${result}`);
+        console.log(`Remaining employees: ${Array.from(this.employees.keys()).join(', ')}`);
+        
+        return result;
+      } catch (error) {
+        console.error(`Error deleting employee with ID ${id}:`, error);
+        return false;
+      }
+    } else {
+      console.log(`Cannot delete: employee with ID ${id} not found`);
+      return false;
     }
-    
-    return false;
   }
 
   async searchEmployees(query: Record<string, any>): Promise<Employee[]> {

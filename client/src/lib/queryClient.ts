@@ -5,6 +5,7 @@ async function throwIfResNotOk(res: Response) {
     const text = (await res.text()) || res.statusText;
     throw new Error(`${res.status}: ${text}`);
   }
+  return res; // Explicitly return the response
 }
 
 export async function apiRequest(
@@ -12,15 +13,23 @@ export async function apiRequest(
   url: string,
   data?: unknown | undefined,
 ): Promise<Response> {
-  const res = await fetch(url, {
-    method,
-    headers: data ? { "Content-Type": "application/json" } : {},
-    body: data ? JSON.stringify(data) : undefined,
-    credentials: "include",
-  });
-
-  await throwIfResNotOk(res);
-  return res;
+  console.log(`Making API request: ${method} ${url}`, data);
+  
+  try {
+    const res = await fetch(url, {
+      method,
+      headers: data ? { "Content-Type": "application/json" } : {},
+      body: data ? JSON.stringify(data) : undefined,
+      credentials: "include",
+    });
+    
+    console.log(`API response status: ${res.status}`);
+    await throwIfResNotOk(res);
+    return res;
+  } catch (error) {
+    console.error(`API request failed: ${method} ${url}`, error);
+    throw error;
+  }
 }
 
 type UnauthorizedBehavior = "returnNull" | "throw";

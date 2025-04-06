@@ -29,10 +29,43 @@ export default function DeleteEmployeeDialog({
   
   const deleteMutation = useMutation({
     mutationFn: async () => {
-      if (!employee) return;
-      const response = await apiRequest("DELETE", `/api/employees/${employee.id}`);
-      console.log("Delete response status:", response.status);
-      return true; // Return something to indicate success
+      if (!employee) {
+        console.error("Delete mutation attempted with null employee");
+        throw new Error("No employee to delete");
+      }
+      
+      console.log("Deleting employee with ID:", employee.id);
+      
+      try {
+        const response = await apiRequest("DELETE", `/api/employees/${employee.id}`);
+        console.log("Delete response:", { 
+          status: response.status, 
+          statusText: response.statusText,
+          ok: response.ok,
+          type: response.type,
+          url: response.url
+        });
+        
+        // For 204 responses, there's no body to parse
+        if (response.status === 204) {
+          console.log("Delete successful with 204 No Content response");
+          return true;
+        }
+        
+        // For other successful responses, try to parse the body if there is one
+        try {
+          const clonedResponse = response.clone();
+          const text = await clonedResponse.text();
+          console.log("Delete response body:", text || "(empty)");
+        } catch (parseError) {
+          console.log("Could not parse response body:", parseError);
+        }
+        
+        return true; // Return something to indicate success
+      } catch (error) {
+        console.error("Error in delete mutation:", error);
+        throw error; // Re-throw to trigger onError
+      }
     },
     onSuccess: () => {
       console.log("Delete mutation successful, invalidating queries");
@@ -74,7 +107,11 @@ export default function DeleteEmployeeDialog({
         <AlertDialogFooter>
           <AlertDialogCancel>Cancel</AlertDialogCancel>
           <AlertDialogAction 
-            onClick={handleDelete}
+            onClick={(e) => {
+              e.preventDefault(); // Prevent default action
+              e.stopPropagation(); // Stop event propagation
+              handleDelete(); // Call our delete handler
+            }}
             className="bg-red-600 hover:bg-red-700 focus:ring-red-500"
           >
             Delete

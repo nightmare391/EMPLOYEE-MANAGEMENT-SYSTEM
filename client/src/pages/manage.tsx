@@ -33,7 +33,10 @@ export default function Manage() {
   };
   
   const handleDeleteClick = (employee: Employee) => {
-    setSelectedEmployee(employee);
+    console.log("Delete clicked for employee:", employee);
+    // Create a fresh copy of the employee object to avoid any reference issues
+    const employeeCopy = { ...employee };
+    setSelectedEmployee(employeeCopy);
     setIsDeleteDialogOpen(true);
   };
   
