@@ -2,12 +2,72 @@
 @tailwind components;
 @tailwind utilities;
 
+:root {
+  --background: #634832;
+  --foreground: #ece0d1;
+  --button: #dbc1ac;
+  --navbar: #967259;
+  --card: #7d5a42;
+}
+
 @layer base {
   * {
     @apply border-border;
   }
 
   body {
-    @apply font-sans antialiased bg-background text-foreground;
+    @apply font-sans antialiased;
+    background-color: var(--background);
+    color: var(--foreground);
+  }
+
+  /* Custom button colors */
+  .bg-primary,
+  .hover\:bg-primary:hover,
+  .hover\:bg-blue-600:hover {
+    background-color: var(--button) !important;
+    color: var(--background) !important;
+    font-weight: 500;
+  }
+
+  /* Navbar styling */
+  nav {
+    background-color: var(--navbar) !important;
+    color: var(--foreground) !important;
+  }
+
+  /* Cards and content containers */
+  .bg-white, .bg-gray-50 {
+    background-color: var(--card) !important;
+    color: var(--foreground) !important;
+  }
+
+  /* Dialog backgrounds */
+  [role="dialog"] {
+    background-color: var(--card) !important;
+    color: var(--foreground) !important;
+  }
+
+  /* Table headers */
+  th {
+    background-color: var(--navbar) !important;
+    color: var(--foreground) !important;
+  }
+
+  /* Table cells */
+  td {
+    color: var(--foreground) !important;
+  }
+
+  /* Input fields */
+  input, textarea, select {
+    background-color: var(--card) !important;
+    color: var(--foreground) !important;
+    border-color: var(--navbar) !important;
+  }
+
+  /* Links */
+  a {
+    color: var(--button) !important;
   }
 }
