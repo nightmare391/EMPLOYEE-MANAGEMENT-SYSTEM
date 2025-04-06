@@ -103,17 +103,30 @@ export async function registerRoutes(app: Express): Promise<Server> {
     try {
       const id = parseInt(req.params.id);
       if (isNaN(id)) {
+        console.error(`Delete failed: Invalid employee ID - ${req.params.id}`);
         return res.status(400).json({ message: "Invalid employee ID" });
       }
+      
+      // Get current employees to check if the employee exists
+      const beforeEmployees = await storage.getEmployees();
+      console.log(`Current employees count before delete: ${beforeEmployees.length}`);
+      console.log(`Employee IDs before delete: ${beforeEmployees.map(e => e.id).join(', ')}`);
       
       console.log(`Attempting to delete employee with ID: ${id}`);
       const success = await storage.deleteEmployee(id);
       console.log(`Delete result: ${success}`);
       
+      // Get updated employees after delete attempt
+      const afterEmployees = await storage.getEmployees();
+      console.log(`Current employees count after delete: ${afterEmployees.length}`);
+      console.log(`Employee IDs after delete: ${afterEmployees.map(e => e.id).join(', ')}`);
+      
       if (!success) {
+        console.error(`Delete failed: Employee with ID ${id} not found`);
         return res.status(404).json({ message: "Employee not found" });
       }
       
+      console.log(`Successfully deleted employee with ID: ${id}`);
       res.status(204).send();
     } catch (error) {
       console.error("Error deleting employee:", error);

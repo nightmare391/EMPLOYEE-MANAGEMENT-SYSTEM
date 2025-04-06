@@ -104,7 +104,17 @@ export class MemStorage implements IStorage {
   }
 
   async deleteEmployee(id: number): Promise<boolean> {
-    return this.employees.delete(id);
+    // Check if the employee exists before trying to delete
+    const exists = this.employees.has(id);
+    console.log(`Employee with ID ${id} exists: ${exists}`);
+    
+    if (exists) {
+      const result = this.employees.delete(id);
+      console.log(`Map.delete result for ID ${id}: ${result}`);
+      return result;
+    }
+    
+    return false;
   }
 
   async searchEmployees(query: Record<string, any>): Promise<Employee[]> {

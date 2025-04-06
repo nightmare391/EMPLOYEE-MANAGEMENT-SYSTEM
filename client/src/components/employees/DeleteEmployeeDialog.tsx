@@ -30,9 +30,12 @@ export default function DeleteEmployeeDialog({
   const deleteMutation = useMutation({
     mutationFn: async () => {
       if (!employee) return;
-      await apiRequest("DELETE", `/api/employees/${employee.id}`);
+      const response = await apiRequest("DELETE", `/api/employees/${employee.id}`);
+      console.log("Delete response status:", response.status);
+      return true; // Return something to indicate success
     },
     onSuccess: () => {
+      console.log("Delete mutation successful, invalidating queries");
       queryClient.invalidateQueries({ queryKey: ["/api/employees"] });
       toast({
         title: "Success",
@@ -41,6 +44,7 @@ export default function DeleteEmployeeDialog({
       onClose();
     },
     onError: (error) => {
+      console.error("Delete mutation error:", error);
       toast({
         title: "Error",
         description: `Failed to delete employee: ${error.message}`,
