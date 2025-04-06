@@ -166,7 +166,7 @@ export default function Search() {
               onClick={handleSearch}
               disabled={isLoading}
             >
-              <SearchIcon className="h-4 w-4 mr-1" /> Search Employees
+              <SearchIcon className="h-4 w-4 mr-1 text-[#bda476]" /> Search Employees
             </Button>
           </div>
         </div>
