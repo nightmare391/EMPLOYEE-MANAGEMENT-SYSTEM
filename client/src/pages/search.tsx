@@ -275,7 +275,7 @@ export default function Search() {
                       </TableCell>
                       <TableCell className="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
                         <Link href={`/employees/${employee.id}`}>
-                          <a className="text-primary hover:text-blue-800">View</a>
+                          <span className="text-primary hover:text-blue-800 cursor-pointer">View</span>
                         </Link>
                       </TableCell>
                     </TableRow>
