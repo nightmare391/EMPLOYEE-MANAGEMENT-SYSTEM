@@ -73,8 +73,8 @@
 
   /* Form elements */
   input, select, textarea {
-    background-color: var(--background) !important;
-    color: var(--foreground) !important;
+    background-color: var(--neutral) !important;
+    color: var(--background) !important;
     border-color: var(--accent) !important;
   }
 
