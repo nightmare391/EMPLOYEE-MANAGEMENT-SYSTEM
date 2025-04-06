@@ -31,7 +31,12 @@
   /* Navbar */
   nav, header {
     background-color: var(--primary) !important;
-    color: var(--background) !important;
+    color: var(--foreground) !important;
+  }
+
+  /* Ensure all navbar text is consistent */
+  nav *, header * {
+    color: var(--foreground) !important;
   }
 
   /* Buttons */
@@ -39,7 +44,7 @@
   button[type="submit"],
   .btn-primary {
     background-color: var(--primary) !important;
-    color: var(--background) !important;
+    color: var(--foreground) !important;
     font-weight: 500;
   }
 
@@ -71,7 +76,7 @@
   /* Table elements */
   th {
     background-color: var(--primary) !important;
-    color: var(--background) !important;
+    color: var(--foreground) !important;
     font-weight: 600;
   }
 
@@ -82,7 +87,7 @@
   /* Badges and indicators */
   .badge {
     background-color: var(--neutral) !important;
-    color: var(--background) !important;
+    color: var(--foreground) !important;
   }
 
   /* Borders */
