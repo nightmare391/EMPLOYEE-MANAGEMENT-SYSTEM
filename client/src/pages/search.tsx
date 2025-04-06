@@ -100,12 +100,16 @@ export default function Search() {
         <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-4">
           <div>
             <label htmlFor="search-name" className="block text-sm font-medium text-gray-700 mb-1">Name</label>
-            <Input
-              id="search-name"
-              value={searchParams.name}
-              onChange={(e) => handleInputChange("name", e.target.value)}
-              placeholder="Search by name..."
-            />
+            <div className="relative">
+              <SearchIcon className="absolute left-3 top-1/2 transform -translate-y-1/2 h-4 w-4 text-[#bda476]" />
+              <Input
+                id="search-name"
+                value={searchParams.name}
+                onChange={(e) => handleInputChange("name", e.target.value)}
+                placeholder="Search by name..."
+                className="pl-10"
+              />
+            </div>
           </div>
           
           <div>
@@ -130,24 +134,32 @@ export default function Search() {
           
           <div>
             <label htmlFor="search-role" className="block text-sm font-medium text-gray-700 mb-1">Role</label>
-            <Input
-              id="search-role"
-              value={searchParams.role}
-              onChange={(e) => handleInputChange("role", e.target.value)}
-              placeholder="Search by role..."
-            />
+            <div className="relative">
+              <SearchIcon className="absolute left-3 top-1/2 transform -translate-y-1/2 h-4 w-4 text-[#bda476]" />
+              <Input
+                id="search-role"
+                value={searchParams.role}
+                onChange={(e) => handleInputChange("role", e.target.value)}
+                placeholder="Search by role..."
+                className="pl-10"
+              />
+            </div>
           </div>
         </div>
         
         <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-6">
           <div>
             <label htmlFor="search-location" className="block text-sm font-medium text-gray-700 mb-1">Location</label>
-            <Input
-              id="search-location"
-              value={searchParams.city}
-              onChange={(e) => handleInputChange("city", e.target.value)}
-              placeholder="City or remote..."
-            />
+            <div className="relative">
+              <SearchIcon className="absolute left-3 top-1/2 transform -translate-y-1/2 h-4 w-4 text-[#bda476]" />
+              <Input
+                id="search-location"
+                value={searchParams.city}
+                onChange={(e) => handleInputChange("city", e.target.value)}
+                placeholder="City or remote..."
+                className="pl-10"
+              />
+            </div>
           </div>
           
           <div>
