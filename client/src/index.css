@@ -3,11 +3,13 @@
 @tailwind utilities;
 
 :root {
-  --background: #634832;
-  --foreground: #ece0d1;
-  --button: #dbc1ac;
-  --navbar: #967259;
-  --card: #7d5a42;
+  --background: #3c2f2f; /* Dark coffee */
+  --foreground: #f5e8d5; /* Cream */
+  --primary: #a67c52;    /* Medium roast coffee */
+  --card: #4e3b31;       /* Espresso */
+  --navbar: #63493a;     /* Coffee bean */
+  --accent: #d3b99f;     /* Coffee with cream */
+  --muted: #8c7355;      /* Mocha */
 }
 
 @layer base {
@@ -21,53 +23,64 @@
     color: var(--foreground);
   }
 
-  /* Custom button colors */
-  .bg-primary,
-  .hover\:bg-primary:hover,
-  .hover\:bg-blue-600:hover {
-    background-color: var(--button) !important;
-    color: var(--background) !important;
-    font-weight: 500;
-  }
-
-  /* Navbar styling */
-  nav {
-    background-color: var(--navbar) !important;
-    color: var(--foreground) !important;
-  }
-
-  /* Cards and content containers */
-  .bg-white, .bg-gray-50 {
+  /* Cards */
+  .bg-card, .bg-white, .bg-gray-50, .bg-gray-100 {
     background-color: var(--card) !important;
     color: var(--foreground) !important;
   }
 
-  /* Dialog backgrounds */
+  /* Navbar */
+  nav, header {
+    background-color: var(--navbar) !important;
+    color: var(--foreground) !important;
+  }
+
+  /* Buttons */
+  .bg-primary, .bg-blue-600, 
+  button[type="submit"],
+  .btn-primary {
+    background-color: var(--primary) !important;
+    color: var(--foreground) !important;
+  }
+
+  /* Hover states */
+  .hover\:bg-primary:hover,
+  .hover\:bg-blue-600:hover,
+  button[type="submit"]:hover {
+    background-color: var(--muted) !important;
+  }
+
+  /* Accent elements */
+  .text-primary, a {
+    color: var(--accent) !important;
+  }
+
+  /* Dialog/modal backgrounds */
   [role="dialog"] {
     background-color: var(--card) !important;
     color: var(--foreground) !important;
   }
 
-  /* Table headers */
+  /* Form elements */
+  input, select, textarea {
+    background-color: var(--background) !important;
+    color: var(--foreground) !important;
+    border-color: var(--muted) !important;
+  }
+
+  /* Table elements */
   th {
     background-color: var(--navbar) !important;
     color: var(--foreground) !important;
   }
 
-  /* Table cells */
   td {
     color: var(--foreground) !important;
   }
 
-  /* Input fields */
-  input, textarea, select {
-    background-color: var(--card) !important;
+  /* Badges and indicators */
+  .badge {
+    background-color: var(--muted) !important;
     color: var(--foreground) !important;
-    border-color: var(--navbar) !important;
-  }
-
-  /* Links */
-  a {
-    color: var(--button) !important;
   }
 }
