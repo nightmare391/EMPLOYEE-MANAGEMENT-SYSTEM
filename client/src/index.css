@@ -7,7 +7,7 @@
   --primary: #9f8453;    /* Gold/tan accent */
   --card: #423723;       /* Medium brown for cards */
   --accent: #bda476;     /* Light gold for highlights */
-  --neutral: #aaaaaa;    /* Gray for neutral elements */
+  --neutral: white;    /* Gray for neutral elements */
   --foreground: #f5f5f5; /* Off-white text */
 }
 

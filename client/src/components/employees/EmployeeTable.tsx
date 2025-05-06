@@ -27,16 +27,16 @@ export default function EmployeeTable({ employees, onEdit, onDelete }: EmployeeT
   
   const getDepartmentStyle = (department: string) => {
     const styles = {
-      Engineering: "bg-blue-100 text-blue-800",
-      Design: "bg-pink-100 text-pink-800",
-      Product: "bg-purple-100 text-purple-800",
-      Marketing: "bg-green-100 text-green-800",
-      Sales: "bg-orange-100 text-orange-800",
-      "Human Resources": "bg-yellow-100 text-yellow-800",
-      Finance: "bg-indigo-100 text-indigo-800",
-      Operations: "bg-teal-100 text-teal-800",
+      Engineering: "bg-blue-100 !text-blue-800",
+      Design: "bg-pink-100 !text-pink-800",
+      Product: "bg-purple-100 !text-purple-800",
+      Marketing: "bg-green-100 !text-green-800",
+      Sales: "bg-orange-100 !text-orange-800",
+      "Human Resources": "bg-yellow-100 !text-yellow-800",
+      Finance: "bg-indigo-100 !text-indigo-800",
+      Operations: "bg-teal-100 !text-teal-800",
     };
-    return styles[department as keyof typeof styles] || "bg-gray-100 text-gray-800";
+    return styles[department as keyof typeof styles] || "bg-gray-100 !text-gray-800";
   };
   
   const formatDate = (date: Date | string) => {
@@ -121,10 +121,10 @@ export default function EmployeeTable({ employees, onEdit, onDelete }: EmployeeT
             {sortedEmployees.map((employee) => (
               <TableRow key={employee.id}>
                 <TableCell className="px-6 py-4 whitespace-nowrap">
-                  <div className="text-sm font-medium text-gray-900">{employee.name}</div>
+                  <div className="text-sm font-medium text-white-900">{employee.name}</div>
                 </TableCell>
                 <TableCell className="px-6 py-4 whitespace-nowrap">
-                  <div className="text-sm text-gray-900">{employee.role}</div>
+                  <div className="text-sm text-white-900">{employee.role}</div>
                 </TableCell>
                 <TableCell className="px-6 py-4 whitespace-nowrap">
                   <span className={`px-2 inline-flex text-xs leading-5 font-semibold rounded-full ${getDepartmentStyle(employee.department)}`}>

@@ -30,24 +30,24 @@ export default function Search() {
     city: "",
     joinedAfter: "",
   });
-  
+
   const [isSearchActive, setIsSearchActive] = useState(false);
-  
+
   const { data: allEmployees, isLoading } = useQuery<Employee[]>({
     queryKey: ["/api/employees"],
   });
-  
+
   const handleInputChange = (field: string, value: string) => {
     setSearchParams((prev) => ({
       ...prev,
       [field]: value,
     }));
   };
-  
+
   const handleSearch = () => {
     setIsSearchActive(true);
   };
-  
+
   // Filter employees based on search criteria
   const filteredEmployees = isSearchActive && allEmployees
     ? allEmployees.filter(employee => {
@@ -73,11 +73,11 @@ export default function Search() {
         return true;
       })
     : [];
-  
+
   const formatDate = (date: Date | string) => {
     return format(new Date(date), "MMM dd, yyyy");
   };
-  
+
   const getDepartmentBadgeClass = (department: string) => {
     const classes = {
       Engineering: "bg-blue-100 text-blue-800",
@@ -91,17 +91,17 @@ export default function Search() {
     };
     return classes[department as keyof typeof classes] || "bg-gray-100 text-gray-800";
   };
-  
+
   return (
     <div>
       <h1 className="text-2xl font-semibold text-gray-800 mb-6">Search Employees</h1>
-      
+
       <div className="bg-white rounded-xl shadow-sm p-6 mb-6">
         <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-4">
           <div>
             <label htmlFor="search-name" className="block text-sm font-medium text-gray-700 mb-1">Name</label>
             <div className="relative">
-              <SearchIcon className="absolute left-3 top-1/2 transform -translate-y-1/2 h-4 w-4 text-[#bda476]" />
+              <SearchIcon className="absolute left-3 top-1/2 transform -translate-y-1/2 h-4 w-4 text-blue-500" />
               <Input
                 id="search-name"
                 value={searchParams.name}
@@ -111,7 +111,7 @@ export default function Search() {
               />
             </div>
           </div>
-          
+
           <div>
             <label htmlFor="search-department" className="block text-sm font-medium text-gray-700 mb-1">Department</label>
             <Select
@@ -131,11 +131,11 @@ export default function Search() {
               </SelectContent>
             </Select>
           </div>
-          
+
           <div>
             <label htmlFor="search-role" className="block text-sm font-medium text-gray-700 mb-1">Role</label>
             <div className="relative">
-              <SearchIcon className="absolute left-3 top-1/2 transform -translate-y-1/2 h-4 w-4 text-[#bda476]" />
+              <SearchIcon className="absolute left-3 top-1/2 transform -translate-y-1/2 h-4 w-4 text-blue-500" />
               <Input
                 id="search-role"
                 value={searchParams.role}
@@ -146,12 +146,12 @@ export default function Search() {
             </div>
           </div>
         </div>
-        
+
         <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-6">
           <div>
             <label htmlFor="search-location" className="block text-sm font-medium text-gray-700 mb-1">Location</label>
             <div className="relative">
-              <SearchIcon className="absolute left-3 top-1/2 transform -translate-y-1/2 h-4 w-4 text-[#bda476]" />
+              <SearchIcon className="absolute left-3 top-1/2 transform -translate-y-1/2 h-4 w-4 text-blue-500" />
               <Input
                 id="search-location"
                 value={searchParams.city}
@@ -161,7 +161,7 @@ export default function Search() {
               />
             </div>
           </div>
-          
+
           <div>
             <label htmlFor="search-join-date" className="block text-sm font-medium text-gray-700 mb-1">Joined After</label>
             <Input
@@ -171,18 +171,18 @@ export default function Search() {
               onChange={(e) => handleInputChange("joinedAfter", e.target.value)}
             />
           </div>
-          
+
           <div className="flex items-end">
             <Button
               className="bg-primary text-white hover:bg-blue-600 w-full"
               onClick={handleSearch}
               disabled={isLoading}
             >
-              <SearchIcon className="h-4 w-4 mr-1 text-[#bda476]" /> Search Employees
+              <SearchIcon className="h-4 w-4 mr-1 text-blue-500" /> Search Employees
             </Button>
           </div>
         </div>
-        
+
         <div className="flex flex-wrap gap-2">
           <span className="text-sm text-gray-500 mr-2">Quick filters:</span>
           <Button
@@ -241,7 +241,7 @@ export default function Search() {
           </Button>
         </div>
       </div>
-      
+
       {/* Search Results */}
       {isSearchActive && (
         <div className="bg-white rounded-xl shadow-sm overflow-hidden">
@@ -251,7 +251,7 @@ export default function Search() {
               Showing {filteredEmployees.length} employee{filteredEmployees.length !== 1 ? 's' : ''} matching your criteria
             </p>
           </div>
-          
+
           <div className="overflow-x-auto">
             <Table>
               <TableHeader className="bg-gray-50">
@@ -302,7 +302,7 @@ export default function Search() {
               </TableBody>
             </Table>
           </div>
-          
+
           {filteredEmployees.length > 0 && (
             <div className="px-6 py-4 border-t border-gray-200 flex items-center justify-between">
               <div className="text-sm text-gray-500">
